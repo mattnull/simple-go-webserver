@@ -9,11 +9,11 @@ const (
 	address string = "127.0.0.1:3000"
 )
 
-func indexRoute() string {
-	return mustache.RenderFile("templates/index.html") 
+func indexRoute(val string) string {
+	return mustache.RenderFile("templates/index.html",map[string]string{"phrase" : val}) 
 }
 
 func main() {
-	web.Get("/", indexRoute)
+	web.Get('/(.*)', indexRoute)
     web.Run(address)
 }
